@@ -1,0 +1,1151 @@
+/* ==========================================================================
+   1. POLICES & VARIABLES (Le squelette)
+   ========================================================================== */
+@font-face {
+    font-family: 'Albert Sans';
+    src: url('../font/AlbertSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Albert Sans';
+    src: url('../font/AlbertSans-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CormorantGaramond';
+    src: url('../font/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CormorantGaramond';
+    src: url('../font/CormorantGaramond-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #FCF4C7;
+    --border-color: rgba(255, 255, 255, 1);
+    
+    /* Tailles de police fluides */
+    --fs-h1: clamp(2.5rem, 8vw, 6rem);
+    --fs-h2: clamp(1.5rem, 4vw, 2.5rem);
+    --fs-body: clamp(1rem, 1.2vw, 1.1rem);
+    --fs-meta: clamp(0.8rem, 1vw, 1rem);
+    
+    /* Marges fluides */
+    --container-padding: clamp(1.5rem, 8vw, 10%);
+}
+
+/* ==========================================================================
+   2. RESET & BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 300;
+    font-size: var(--fs-body);
+    line-height: 1.6;
+}
+
+.texture-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+}
+
+/* Utilitaires typographiques réutilisables */
+.serif-italic {
+    font-family: 'CormorantGaramond', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   3. NAVIGATION & FOOTER (Éléments persistants)
+   ========================================================================== */
+
+/* --- Navbar --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 2px solid var(--border-color);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1830px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--container-padding);
+}
+
+.logo {
+    font-weight: 600;
+    letter-spacing: 2px;
+       color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-left: 50px;
+    padding: 8px 16px;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: white;
+    color: black;
+}
+
+/* --- Footer --- */
+.footer {
+    padding: 60px var(--container-padding);
+    border-top: 2px solid white;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.footer-brand { grid-column: 1 / 6; }
+.footer-column:nth-child(2) { grid-column: 7 / 10; }
+.footer-column:nth-child(3) { grid-column: 10 / 13; }
+
+.footer-logo {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    display: inline-block;
+    border-bottom: 2px solid var(--text-color);
+    padding-bottom: 4px;
+}
+
+.footer-brand-desc {
+    position: relative;
+    padding-left: 20px;
+}
+
+.footer-brand-desc::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 1px;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-links a, .footer-contact a, .footer-contact p {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 12px;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 0.5;
+    padding-left: 5px;
+}
+
+/* ==========================================================================
+   4. SYSTÈME DE GRILLE & CARTES (Commun aux deux pages)
+   ========================================================================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    border: 2px solid white;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.large { grid-column: span 7; }
+.medium { grid-column: span 5; }
+.half { grid-column: span 6; }
+
+/* Bordures utilitaires */
+.border-right { border-right: 2px solid white; }
+.border-bottom { border-bottom: 2px solid white; }
+.border-top { border-top: 2px solid white; }
+.border-left { border-left: 2px solid white; }
+.no-border-top { border-top: none !important; }
+
+/* ==========================================================================
+   5. PAGE D'ACCUEIL (INDEX)
+   ========================================================================== */
+
+/* --- Hero Index --- */
+.hero-content {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    padding: 180px 10% 100px;
+    min-height: 95vh;
+}
+
+.hero-content h1 {
+    grid-column: 1 / 11;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.8;
+    letter-spacing: -0.03em;
+    font-weight: 450;
+}
+
+.hero-content h1 span {
+    font-family: 'CormorantGaramond', serif;
+    font-style: italic;
+    text-transform: lowercase;
+}
+
+.hero-description {
+    grid-column: 8 / 13;
+    padding-left: 30px;
+    position: relative;
+}
+
+.hero-description::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 70%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+}
+
+.hero-description p {
+    font-family: 'CormorantGaramond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #dfdfdf;
+}
+
+.hero-description .date {
+    display: block;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* --- Filtres --- */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 10% 80px;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.section-title::after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
+}
+
+.filter-container {
+    padding: 0 10% 40px;
+    display: flex;
+    gap: 30px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: 0.3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    opacity: 1;
+}
+
+/* --- Cartes de l'Accueil (avec Hover) --- */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    max-height: 89vh;
+}
+
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s ease;
+    opacity: 1;
+}
+
+.project-card:hover img {
+    opacity: 0.3;
+    transform: scale(1.05);
+}
+
+.project-card.hidden { display: none; }
+
+.project-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 30px;
+    opacity: 0;
+    background-color: rgba(10, 10, 10, 0.7);
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    pointer-events: none;
+    color: white;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.category-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.category-wrapper::before {
+    content: "";
+    width: 30px; height: 1px;
+    background: linear-gradient(to right, var(--text-color), transparent);
+}
+
+.category {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.project-details-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.project-details-bottom h3 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.project-details-bottom .year {
+    font-family: 'CormorantGaramond', serif;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   6. PAGE DÉTAIL PROJET (PROJET-NOM.HTML)
+   ========================================================================== */
+
+/* --- Navigation Inter-projets --- */
+/* --- Navigation Bas de Page (Version Minimaliste) --- */
+.project-footer-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid white;
+    /* On garde uniquement la bordure haute pour ne pas doubler avec le footer */
+    background-color: var(--bg-color);
+}
+
+.nav-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px; /* Hauteur réduite pour plus de finesse */
+    text-decoration: none;
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-size: 11px; /* Aligné sur la taille de ta navbar */
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Bordures verticales fines */
+.nav-block.prev, .nav-block.all {
+    border-right: 2px solid white;
+}
+
+/* Effet Hover : Subtil ou Inversé */
+.nav-block:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-footer-nav {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-block.prev, .nav-block.all {
+        border-right: none;
+        border-bottom: 2px solid white;
+    }
+    
+    .nav-block {
+        padding: 25px 10px; /* Encore plus petit sur mobile */
+    }
+}
+
+/* --- Hero Projet --- */
+.project-hero {
+display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    /* On réduit le padding du bas (passé de 100px à 30px) */
+    padding: 180px 10% 30px; 
+    /* On réduit la hauteur minimale (passée de 95vh à auto ou 60vh) */
+    min-height: 60vh; 
+    box-sizing: border-box;
+    position: relative;
+}
+
+.project-hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 1px;
+    z-index: 99;
+    background: linear-gradient(to right, rgba(252, 244, 199, 0.9) 0%, rgba(252, 244, 199, 0.3) 60%, transparent 100%);
+}
+
+.hero-container {
+grid-column: 1 / 13; /* Prend toute la largeur de la grille parente */
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.category-tag {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.category-tag .line {
+    width: 40px; height: 1px;
+    background-color: var(--text-color);
+}
+
+.category-tag .tag-text {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.hero-main-info {
+    grid-column: 1 / 8; /* Aligné à gauche comme le titre de l'accueil */
+}
+
+.hero-main-info h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+}
+
+.description-text {
+    font-family: 'CormorantGaramond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.project-comment {
+    font-size: 13px;
+    opacity: 0.7;
+    line-height: 1.5;
+}
+
+/* --- Metadata --- */
+.hero-metadata {
+  grid-column: 9 / 13; /* Aligné à droite, comme la description de l'accueil */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.meta-label {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #666;
+    font-weight: 600;
+}
+
+.meta-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* --- Galerie Projet (Statique) --- */
+
+.project-gallery {
+    margin-top: 80px; 
+
+}
+
+.gallery-card {
+    max-height: 89vh;
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    display: flex;
+    background-color: var(--bg-color);
+}
+
+.gallery-card img {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1 !important; 
+    transform: none !important;
+    transition: none !important;
+}
+
+/* --- Section Détails (Overview & Process) --- */
+.project-details-section {
+padding: 80px 10%; /* 10% à gauche et à droite pour l'alignement global */
+
+    background-color: var(--bg-color);
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+gap: 20px;
+    width: 100%;
+}
+
+
+.details-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    display: inline-block;
+}
+
+.overview-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: rgba(252, 244, 199, 0.9);
+}
+
+.process-list {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.process-item {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.process-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgba(252, 244, 199, 0.3);
+    line-height: 1;
+}
+
+.process-text h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.process-text p {
+    font-size: 0.9rem;
+    color: rgba(252, 244, 199, 0.6);
+}
+
+
+/* ==========================================================================
+   7.PAGE ABOUT
+   ========================================================================== */
+
+/* Hero About */
+.about-hero {
+    padding: 180px 10% 80px; /* Aligné sur ton hero-content */
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+}
+
+.about-hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+/* Grille de contenu About */
+.about-content-section {
+    padding: 80px 10%;
+    margin-bottom: 100px;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* Grille de 12 */
+    gap: 40px;
+    align-items: start;
+}
+
+/* Bloc texte à gauche (occupe 6 colonnes) */
+.about-text-block {
+    grid-column: 1 / 7;
+}
+
+.inner-text-content {
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    padding-left: 30px;
+}
+
+.inner-text-content p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Image à droite (occupe les 6 colonnes restantes) */
+.about-image-block {
+    grid-column: 7 / 13;
+}
+
+.about-image-block img {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Tablette/Mobile */
+@media (max-width: 1024px) {
+    .about-text-block, 
+    .about-image-block {
+        grid-column: 1 / 13; /* Full width sur mobile */
+    }
+    
+    .about-image-block {
+        margin-top: 40px;
+    }
+}
+
+
+
+/* ==========================================================================
+   8. PAGE SERVICE
+   ========================================================================== */
+/* --- SERVICES SECTION --- */
+
+.services-section {
+    padding: 0 5%; /* Aligné sur ton padding habituel */
+    margin-bottom: 100px;
+}
+
+.service-item {
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.service-cat {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+}
+
+.service-item h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.service-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Texte à gauche, Image à droite */
+    gap: 100px;
+    align-items: center;
+}
+
+.service-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.service-details {
+    list-style: none;
+    padding: 0;
+}
+
+.service-details li {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-visual {
+    height: 72vh;
+   max-height: 50vh;
+   width:100%;
+    background: #1a1a1a; /* Fond de secours */
+    overflow: hidden;
+}
+
+.service-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.service-item:hover .service-visual img {
+    filter: grayscale(0%);
+}
+
+/* Bordures fines cohérentes */
+.border-top { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.border-bottom { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+
+/* Mobile */
+@media (max-width: 900px) {
+    .service-body {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .service-visual {
+        height: 300px;
+    }
+}
+
+/* --- BOUTONS ET ACTIONS --- */
+
+.service-actions {
+    margin-top: 40px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+      color: #fff;
+}
+
+.cta-link {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.secondary-link {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+      color: #fff;
+}
+
+.cta-link:hover, .secondary-link:hover {
+    opacity: 1;
+}
+
+/* Section de fin de page */
+.services-footer {
+    padding: 100px 0;
+    text-align: center;
+ 
+}
+
+.footer-cta-content h3 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.main-cta {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 20px 40px;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.4s ease, color 0.4s ease;
+       color: white;
+       text-decoration: none;
+}
+
+.main-cta:hover {
+    background: #fff;
+    color: #000;
+}
+/* ==========================================================================
+   9. RESPONSIVE (Media Queries)
+   ========================================================================== */
+
+/* Tablettes & Petits Écrans */
+@media (max-width: 1024px) {
+    .projects-grid, .footer-container, .hero-content, .details-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .large, .medium { grid-column: span 1; }
+    
+    .hero-description {
+        grid-column: 1;
+        margin-top: 40px;
+    }
+    
+    .footer-brand, .footer-column { grid-column: 1; }
+    
+    .projects-grid { width: 95%; }
+}
+
+/* Mobiles */
+@media (max-width: 900px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .hero-metadata {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar { height: 60px; }
+    .nav-links a { 
+        margin-left: 15px; 
+        font-size: 10px; 
+        padding: 5px 10px;
+    }
+
+    /* Grille de l'accueil */
+    .project-card {
+        height: 50vh;
+    }
+    .project-overlay {
+        padding: 20px;
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+    }
+    .project-details-bottom h3 { font-size: 1.5rem; }
+
+    /* Galerie projet */
+    .gallery-card.large, 
+    .gallery-card.medium, 
+    .gallery-card.half {
+        grid-column: span 12 !important;
+        border-right: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .process-item {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* ==========================================================================
+   10. PAGE CONTACT (SPECIFIQUE)
+   ========================================================================== */
+
+.contact-section {
+    padding: 80px 10%;
+    margin-bottom: 100px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 60px;
+}
+
+.contact-info-block {
+    grid-column: 1 / 5;
+}
+
+.contact-form-block {
+    grid-column: 6 / 13;
+}
+
+.contact-item {
+    margin-bottom: 40px;
+    text-decoration: none;
+    color: white;
+}
+
+
+/* Style du Formulaire */
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-form input, 
+.custom-form textarea, 
+.custom-form select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 0;
+    color: var(--text-color);
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.custom-form input:focus, 
+.custom-form textarea:focus {
+    border-bottom-color: var(--text-color);
+}
+
+/* Animation subtile du label au focus */
+.form-group:focus-within label {
+    color: var(--text-color);
+    transform: translateX(5px);
+    transition: all 0.3s ease;
+}
+
+/* Style du bouton d'envoi pour qu'il ressemble à tes autres CTA */
+.custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    width: 100%;
+}
+
+.custom-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(252, 244, 199, 0.2);
+}
+
+.custom-select__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.arrow {
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+    margin-bottom: 5px;
+}
+
+/* Quand le menu est ouvert */
+.custom-select.open .arrow {
+    transform: rotate(-135deg);
+    margin-bottom: -5px;
+}
+
+.custom-options {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid rgba(252, 244, 199, 0.1);
+    background: #0f0f0f; /* Un noir très profond pour se détacher du fond */
+    transition: all 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.custom-select.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.custom-option {
+    position: relative;
+    display: block;
+    padding: 15px;
+    font-size: 14px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.custom-option:hover {
+    background: rgba(252, 244, 199, 0.05); /* Effet de survol léger beige */
+}
+
+.custom-option.selected {
+    color: var(--text-color);
+    background: rgba(252, 244, 199, 0.1);
+}
+
+/* Cibler spécifiquement les liens dans les infos de contact */
+.contact-item a.meta-value {
+    text-decoration: none; /* Enlève le soulignement */
+    color: inherit;        /* Utilise la couleur du parent (ton --text-color) */
+    display: inline-block; /* Permet une meilleure gestion des marges si besoin */
+    transition: opacity 0.3s ease;
+}
+
+/* Effet au survol pour l'expérience utilisateur */
+.contact-item a.meta-value:hover {
+    opacity: 0.7;
+    /* Ou tu peux choisir de faire apparaître un soulignement léger : */
+    /* border-bottom: 1px solid var(--text-color); */
+}
+
+/* Bouton spécifique pour l'envoi */
+.custom-form .main-cta {
+    align-self: flex-start;
+    background: transparent;
+    cursor: pointer;
+}
+.custom-form .main-cta:hover {
+  background-color: white;
+}
+
+/* Responsive Contact */
+@media (max-width: 1024px) {
+    .contact-info-block, 
+    .contact-form-block {
+        grid-column: 1 / 13;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
